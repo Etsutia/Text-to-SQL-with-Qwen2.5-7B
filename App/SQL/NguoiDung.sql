@@ -1,0 +1,49 @@
+USE MASTER
+GO
+IF EXISTS (SELECT * FROM SYSDATABASES WHERE name='NguoiDungSQL')
+		DROP DATABASE NguoiDungSQL
+GO
+CREATE DATABASE NguoiDungSQL
+GO
+USE NguoiDungSQL
+GO
+CREATE TABLE users (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    username NVARCHAR(100) NOT NULL UNIQUE,
+    email NVARCHAR(120) NOT NULL UNIQUE,
+    password NVARCHAR(100) NOT NULL,
+    is_admin BIT NOT NULL DEFAULT 0,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE queries (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    question NVARCHAR(MAX) NOT NULL,
+    sql_query NVARCHAR(MAX) NOT NULL,
+    DBSchema NVARCHAR(MAX) NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	is_reported BIT NOT NULL DEFAULT 0,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+
+CREATE TABLE query_reports (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    query_id INT NOT NULL,
+    user_id INT NOT NULL,
+    reason NVARCHAR(MAX) NULL,
+    status NVARCHAR(50) NOT NULL DEFAULT 'pending',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    resolved_at DATETIME NULL,
+    admin_notes NVARCHAR(MAX) NULL,
+    FOREIGN KEY (query_id) REFERENCES queries(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT UQ_user_query UNIQUE (user_id, query_id)
+);
+
+SELECT * FROM users 
+
+SELECT * FROM queries
+
+SELECT * FROM query_reports

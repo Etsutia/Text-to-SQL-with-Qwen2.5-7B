@@ -1,0 +1,153 @@
+.App {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.api-status {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: white;
+  z-index: 1000;
+}
+
+.api-status.connected {
+  background-color: #198754;
+}
+
+.api-status.disconnected {
+  background-color: #dc3545;
+}
+
+pre {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table th,
+.table td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal; 
+  min-width: 100px; 
+  padding: 8px;
+}
+
+.react-syntax-highlighter {
+  border-radius: 4px;
+}
+
+@media (min-width: 1200px) {
+  .container-fluid {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+.query-management {
+  width: 100%;
+  max-width: 100%;
+}
+
+.badge {
+  white-space: nowrap;
+}
+
+.btn-sm {
+  margin-right: 5px;
+}
+
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+    min-width: 120px;
+  }
+  
+  .table th:first-child,
+  .table td:first-child {
+    position: sticky;
+    left: 0;
+    background-color: white;
+    z-index: 1;
+  }
+  
+  .table th:last-child,
+  .table td:last-child {
+    position: sticky;
+    right: 0;
+    background-color: white;
+    z-index: 1;
+  }
+}
+
+.table th:nth-last-child(2),
+.table td:nth-last-child(2),
+.table th:last-child,
+.table td:last-child {
+  min-width: 100px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  margin: 0 auto;
+}
+
+pre {
+  margin: 0 !important;
+  border-radius: 4px;
+}
+
+.syntax-highlighter-container {
+  position: relative;
+  width: 100%;
+}
+
+
+.btn-sm {
+  margin: 2px;
+}
+
+.sidebar-container {
+  height: calc(100vh - 56px);
+  position: sticky;
+  top: 56px;
+  overflow-y: auto;
+  padding: 0 !important;
+  background-color: #f8f9fa;
+  border-right: 1px solid #dee2e6;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+  .sidebar-container {
+    height: auto;
+    max-height: 300px;
+    position: relative;
+    top: 0;
+    border-right: none;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 15px;
+  }
+}
