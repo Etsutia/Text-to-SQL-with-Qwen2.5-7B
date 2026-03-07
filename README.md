@@ -1,40 +1,39 @@
-# 🛢️ XÂY DỰNG ỨNG DỤNG CHUYỂN ĐỔI NGÔN NGỮ TỰ NHIÊN SANG NGÔN NGỮ TRUY VẤN DQL
-(Text-to-DQL using Large Language Model – Qwen2.5 7B)
+# 🛢️ Application for Converting Natural Language to SQL Queries (Text-to-SQL)
+(Text-to-SQL using Large Language Model – Qwen2.5 7B)
 ------------------------------------------------
 
-## 👋 Giới thiệu
+## 👋 Introduction
 
-Dự án này được xây dựng trong khuôn khổ khóa luận tốt nghiệp ngành Công nghệ thông tin trường Đại học Quốc Tế Hồng Bàng.
+This project was developed as a graduation thesis for the Information Technology program at Hong Bang International University.
 
-Mục tiêu của hệ thống là:
+The primary objectives of the system are:
 
-- Hỗ trợ người dùng không có kiến thức SQL/DQL vẫn có thể truy vấn dữ liệu.
+- Accessibility: Enabling users without SQL/DQL knowledge to query databases effectively.
   
-- Chuyển đổi câu hỏi ngôn ngữ tự nhiên → câu truy vấn DQL sử dụng mô hình ngôn ngữ lớn (LLM) Qwen2.5 7B.
+- AI-Powered Conversion: Converting natural language questions into DQL queries using the Qwen2.5 7B Large Language Model (LLM).
   
-- Tinh chỉnh mô hình Qwen2.5 7B trên Spider dataset để nâng cao khả năng hiểu cấu trúc CSDL và sinh câu truy vấn chính xác.
+- Model Optimization: Fine-tuning the Qwen2.5 7B model on the Spider dataset to enhance its understanding of database schemas and improve query generation accuracy.
 
-Ứng dụng cung cấp giao diện web thân thiện, dễ dùng, gồm chức năng truy vấn, xem lịch sử, báo cáo truy vấn và trang quản trị người dùng.
-
+The application features a user-friendly web interface including query functions, history tracking, error reporting, and an administrative dashboard for user management.
 ------------------------------------------------
 
-## ⭐ Tính năng chính
+## ⭐ Key Features
 
 
-- Chuyển đổi ngôn ngữ tự nhiên → DQL.
+- Natural Language to SQL Conversion: Seamlessly transform human language into structured queries.
 
-- Hỗ trợ nhiều dạng câu hỏi: thống kê, lọc dữ liệu, liên kết bảng, truy vấn nhóm...
+- Complex Query Support: Handles various query types, including statistics, data filtering, table joins, and grouping (GROUP BY).
 
-- Lưu lịch sử truy vấn & xem lại.
+- Query History: Save and review previous search sessions.
 
-- Báo cáo câu truy vấn sai.
+- Error Reporting: Users can report inaccurate query generations for further refinement.
 
-- Quản trị người dùng và truy vấn.
+- Admin Management: Dedicated tools for managing users and monitoring system queries.
 
-- Chạy mô hình AI cục bộ qua LM Studio Server (không cần kết nối cloud).
+- Local AI Deployment: Runs locally via LM Studio Server, ensuring data privacy and no cloud dependency.
 ------------------------------------------------
 
-## 🏗 Kiến trúc hệ thống
+## 🏗 System Architecture
 
 ```
 ReactJS (Frontend)  
@@ -47,21 +46,21 @@ Microsoft SQL Server
 ```
 ------------------------------------------------
 
-## 🤖 Mô hình ngôn ngữ lớn (LLM) & Kỹ thuật tinh chỉnh
+## 🤖 LLM & Fine-tuning Techniques
 
-- Mô hình: Qwen2.5 7B (Decoder-only Transformer)
+- Model: Qwen2.5 7B (Decoder-only Transformer)
 
-  - Kỹ thuật tinh chỉnh:
+- Fine-tuning Techniques:
 
-  - PEFT
+  - PEFT (Parameter-Efficient Fine-Tuning)
 
-  - LoRA
+  - LoRA (Low-Rank Adaptation)
 
-  - Supervised Fine-Tuning (SFT)
+  - SFT (Supervised Fine-Tuning)
 
 - Dataset: Spider
 
-- Bộ đánh giá:
+- Evaluation Metrics:
 
   - Exact Match (EM)
 
@@ -70,9 +69,9 @@ Microsoft SQL Server
   - Partial Matching Score
 ------------------------------------------------
 
-## 🛠 Công nghệ sử dụng
+## 🛠 Tech Stack
 
-| Thành phần    | Công nghệ                                 |
+| Component    | Technology                                |
 | ------------- | :-----------------------------------------: |
 | Frontend      | ReactJS                                   |
 | Backend       | Flask (Python)                            |
@@ -82,37 +81,36 @@ Microsoft SQL Server
 | Dataset       | Spider                                    |
 ------------------------------------------------
 
-## 📊 Đánh giá mô hình
+## 📊 Model Evaluation
 
-Để hiểu rõ hơn về hiệu suất mô hình trên các truy vấn khác nhau, các truy vấn DQL trong tập Spider được chia thành 4 cấp độ: dễ (easy), trung bình (medium), khó (hard), và cực khó (extra hard) theo cách phân chia độ khó chính thức của tập dữ liệu Spider.
+To provide a comprehensive view of performance, DQL queries in the Spider dataset are categorized into four levels: Easy, Medium, Hard, and Extra Hard, following the official Spider evaluation criteria.
 
-Dưới đây là kết quả đánh giá mô hình thông qua 2 phương pháp Exact Matching without Values (EM) without Values và phương pháp Execution Accuracy (EX) để đo lường khả năng tạo ra câu truy vấn SQL của mô hình.
+The following table displays the results using Exact Matching without Values (EM) and Execution Accuracy (EX) to measure the model's SQL generation capabilities.
 
-| Độ khó     | Dễ | Trung bình | Khó | Cực khó | Tổng |
+| Difficulty    | Easy | Medium | Hard | Extra Hard | Total |
 |-----------|:----:|:-------------:|:-----:|:----------:|:-------:|
-| **Số câu** | 250 | 440 | 173 | 170 | 1033 |
+| **Count** | 250 | 440 | 173 | 170 | 1033 |
 | **EM**     | 0.816 | 0.720 | 0.538 | 0.447 | 0.668 |
 | **EX**     | 0.856 | 0.745 | 0.665 | 0.488 | 0.716 |
 
-Để đánh giá hiệu quả của mô hình sau khi được tinh chỉnh, bảng sau trình bày kết quả so sánh giữa mô hình Qwen 2.5 7B được tinh chỉnh trên bộ dữ liêu Spider và mô hình Qwen2.5 7B gốc dựa trên hai chỉ số EM và EX theo từng mức độ khó của truy vấn.
-
-| Độ khó                    | | Dễ   | Trung bình | Khó   | Cực khó | Tổng  |
+To evaluate the effectiveness of the fine-tuning process, the table below compares the Fine-tuned Qwen2.5 7B against the Base Qwen2.5 7B model across both EM and EX metrics.
+| Difficulty                   | | Easy   | Medium | Hard  | Extra Hard | Total  |
 |-------------------------------------|--------|:------:|:-------------:|:--------:|:----------:|:--------:|
-| **Số câu**                          |        | 250  | 440         | 173    | 170      | 1033   |
-| **Qwen 2.5 7B đã được tinh chỉnh** | EM     | 0.816 | 0.720 | 0.538 | 0.447 | 0.668 |
+| **Count**                          |        | 250  | 440         | 173    | 170      | 1033   |
+| **Fine-tuned Qwen 2.5 7B** | EM     | 0.816 | 0.720 | 0.538 | 0.447 | 0.668 |
 |                                     | EX     | 0.856 | 0.745 | 0.665 | 0.488 | 0.716 |
-| **Qwen 2.5 7B bản gốc**             | EM     | 0.436 | 0.273 | 0.253 | 0.147 | 0.228 |
+| **Base Qwen 2.5 7B**             | EM     | 0.436 | 0.273 | 0.253 | 0.147 | 0.228 |
 |                                     | EX     | 0.438 | 0.302 | 0.310 | 0.188 | 0.317 |
 
 
 ------------------------------------------------
 
-## 🎯 Hướng cải thiện
+## 🎯 Future Roadmap
 
-- Cải thiện hiệu suất với truy vấn phức tạp (nested queries).
+- Optimization: Improve performance for highly complex nested queries.
 
-- Tích hợp với cơ sở dữ liệu thực tế để thực hiện việc truy xuất thông tin thông qua câu truy vấn đã được tạo bởi mô hình.
+- Production Integration: Connect with live production databases for real-time information retrieval.
+  
+- Data Visualization: Integrate dynamic charts and dashboards to visualize query results.
 
-- Hiển thị trực quan với biểu đồ phù hợp với dữ liệu trả về từ truy vấn.
-
-- Hỗ trợ truy vấn đa ngôn ngữ.
+- Multilingual Support: Expand natural language query capabilities to multiple languages.
